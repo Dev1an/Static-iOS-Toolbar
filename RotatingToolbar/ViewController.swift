@@ -12,24 +12,23 @@ import NotificationCenter
 class ViewController: UIViewController {
 	@IBOutlet weak var image: UIImageView!
 	@IBOutlet weak var toolbar: UIToolbar!
+	@IBOutlet weak var toolbarLeftMargin: NSLayoutConstraint!
+	@IBOutlet weak var toolbarRightMargin: NSLayoutConstraint!
 	var orientation: UIDeviceOrientation { return UIDevice.current.orientation }
 	var observer: AnyObject?
 
 	override var shouldAutorotate: Bool { return false }
 	
 	func orientationChanged(_ notification: Notification) {
+		UIApplication.shared.statusBarOrientation = orientation.correspondingInterfaceOrientation
+		
 		let rotation = CGAffineTransform(rotationAngle: self.orientation.angle)
-		let size: CGSize
-		if orientation.isLandscape {
-			size = CGSize(width: UIScreen.main.bounds.size.height - 20, height: UIScreen.main.bounds.size.width)
-		} else {
-			size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 20)
-		}
+		let size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
 		UIView.animate(withDuration: CATransaction.animationDuration()) {
 			self.image.transform = rotation
 			self.image.frame.size = size
 			self.image.bounds.size = size
-			self.image.frame.origin = CGPoint(x: 0, y: 20)
+			self.image.frame.origin = CGPoint(x: 0, y: 0)
 			
 			for item in self.toolbar.items!.flatMap({$0.customView}) {
 				item.transform = rotation
@@ -48,6 +47,10 @@ class ViewController: UIViewController {
 			NotificationCenter.default.removeObserver(observer)
 		}
 	}
+	
+	override var prefersStatusBarHidden: Bool {
+		return true
+	}
 }
 
 extension UIDeviceOrientation {
@@ -61,6 +64,19 @@ extension UIDeviceOrientation {
 			return .pi/2
 		case .landscapeRight:
 			return -.pi/2
+		}
+	}
+	
+	var correspondingInterfaceOrientation: UIInterfaceOrientation {
+		switch self {
+		case .faceUp, .faceDown, .portrait, .unknown:
+			return .portrait
+		case .portraitUpsideDown:
+			return .portraitUpsideDown
+		case .landscapeLeft:
+			return .landscapeRight
+		case .landscapeRight:
+			return .landscapeLeft
 		}
 	}
 }

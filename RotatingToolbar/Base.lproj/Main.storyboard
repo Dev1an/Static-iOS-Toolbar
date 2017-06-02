@@ -48,14 +48,16 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="imO-x2-eQZ" secondAttribute="trailing" id="Onf-hB-Dvm"/>
+                            <constraint firstAttribute="right" secondItem="imO-x2-eQZ" secondAttribute="right" id="Onf-hB-Dvm"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="imO-x2-eQZ" secondAttribute="bottom" id="nyv-XB-61Z"/>
-                            <constraint firstItem="imO-x2-eQZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uDE-cp-6Xo"/>
+                            <constraint firstItem="imO-x2-eQZ" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="uDE-cp-6Xo"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="image" destination="Hfb-hr-wgG" id="hri-5J-3Vo"/>
                         <outlet property="toolbar" destination="imO-x2-eQZ" id="unb-36-W1p"/>
+                        <outlet property="toolbarLeftMargin" destination="uDE-cp-6Xo" id="JO1-hW-ArG"/>
+                        <outlet property="toolbarRightMargin" destination="Onf-hB-Dvm" id="VaB-wm-9gv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -64,6 +66,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Forest" width="1600" height="1067"/>
+        <image name="Forest" width="1600" height="900"/>
     </resources>
 </document>
